@@ -2,7 +2,7 @@
 .NOTES
     #######################################################################################################################################
     # Author: Jim B.
-    # Latest version can be found on Github: https://github.com/jbienstman/SMAT/ReportLastModifiedDateAllListsInFarm.ps1
+    # Latest version can be found on Github: https://github.com/jbienstman/SMAT
     #######################################################################################################################################
     # Revision(s)
     # 1.0.0 2021-10-14  Initial Version
