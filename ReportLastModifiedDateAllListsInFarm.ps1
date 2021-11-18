@@ -217,7 +217,7 @@ foreach ($spWebApplication in $spWebApplications)
                 $k++
                 if ($outputEnabled) {Write-Host (" - - + [" + $k + "/" + $spSite.AllWebs.Count +  "] (spWeb) - `"" + $spWeb.ServerRelativeUrl + "`"") -foreGroundcolor Gray}
                 $spLists = $spWeb.Lists | Where-Object {$_.Hidden -eq $False -and $ExcludedLists -notcontains $_.Title}
-                if ($spLists -eq $null)
+                if ($null -eq $spLists)
                     {
                     if ($outputEnabled) {Write-Host (" - - - + NO LISTS FOUND! - SKIPPING WEB ") -foreGroundcolor Yellow}
                     }
