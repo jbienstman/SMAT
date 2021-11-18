@@ -8,11 +8,29 @@
     # 1.0.0 2021-10-14  Initial Version
     # 1.1.0 2021-11-08  Updated script cosmetics
     # 1.2.0 2021-11-08  Now checking whether the $reportPath exists (added Function: AskYesNoQuestion)
+    # 1.2.1 2021-11-18  Updated Header Synopsis, Description, Example ...
     #######################################################################################################################################
+
 .SYNOPSIS
-    This script will iterate through all lists in all webs in all sites and report the Last Modified Date based on the items inside the
+    On a SharePoint Server 2010+ Farm (On-Premise), this script will iterate through all lists in all webs in all sites in all web applications
+    and output a CSV report with the Last Modified Date and Modified By (if enabled and available) for each list.
+    This is meant to be more accurate than the web level property "LastItemModifiedDate" provided by default.
+
 .DESCRIPTION
-    ...
+    Prerequisites:
+    - The account used to run the script must have the following permissions:
+        - SharePoint Farm Administrator
+        - SPShellAdmin for all content databases: https://docs.microsoft.com/en-us/powershell/module/sharepoint-server/add-spshelladmin
+        - Local Administrator permissions on the SharePoint server where you will run this script
+        - Minimum "full read" in all web application user policies: https://docs.microsoft.com/en-us/sharepoint/administration/manage-permission-policies-for-a-web-application#add-users-to-or-remove-users-from-a-permission-policy-level
+    - SharePoint PowerShell Snap-in: "Microsoft.SharePoint.PowerShell" (*)
+
+    Running the Script:
+    - You can run the script as a whole by updating the parameters directly or you can call the script from a PowerShell window (*)
+
+.EXAMPLE
+    ReportLastModifiedDateAllListsInFarm -reportPath "C:\TEMP\" -reportLastModifiedBy:$true -outputEnabled:true
+
 #>
 ###########################################################################################################################################
 Param (
