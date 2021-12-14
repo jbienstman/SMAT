@@ -252,7 +252,7 @@ foreach ($spWebApplication in $spWebApplications)
                             $ListItemCount = $spList.Items.Count #double checking if the item count is suspiciously low
                             }
                         #endregion - check list item count
-                        if ($outputEnabled) {Write-Host (" - - - + [" + $l + "/" + $spLists.Count +  "] (spList) - " + $spList.Title + " (#" + $ListItemCount + ")") -foreGroundcolor DarkGray}
+                        if ($outputEnabled) {Write-Host (" - - - + [" + $l + "/" + $spLists.Count +  "] (" + $spList.BaseTemplate + ") - " + $spList.Title + " (#" + $ListItemCount + ")") -foreGroundcolor DarkGray}
                         #region - query to get "last modified by" info
                         if ($reportLastModifiedBy)
                             {
