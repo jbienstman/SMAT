@@ -213,7 +213,7 @@ else
     Write-Warning ("The path: " + $reportPath + " does not exist!")
     exit
     }
-$reportFullPathName = ($reportPath.Trim("\") + "\" + "LastModifiedDatesAllListsInFarm_" + $spFarm.ID.Guid + "_" + (Get-Date -Format yyyyMMddHHmmss) + ".csv")
+$reportFullPathName = ($reportPath.Trim("\") + "\" + "LastModifiedDatesListsInFarm_" + $spFarm.ID.Guid + "_" + (Get-Date -Format yyyyMMddHHmmss) + ".csv")
 $spObjects = @()
 $i = 0
 foreach ($spWebApplication in $spWebApplications)
