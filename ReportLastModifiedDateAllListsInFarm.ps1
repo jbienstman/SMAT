@@ -272,6 +272,7 @@ Function Get-SpSiteListsInfo {
             }
         $spWeb.Dispose()
         }
+    $spSite.Dispose()
     return $SpSiteListsInfo
 }
 #endregion - Function(s)
@@ -303,6 +304,7 @@ elseif ($siteUrl -ne "")
     $siteIndicator = ""
     $siteUrl.Split("/") | Select-Object -Last 3 | ForEach-Object {if ($_ -ne "" -and $_ -notlike "*:*") {$siteIndicator += $_ + "_"}}
     $reportScopeId = ("InSite_" + $siteIndicator + "" + $spsite.ID.Guid)
+    $spSite.Dispose()
     }
 elseif ($webAppUrl -ne "")
     {
@@ -330,7 +332,7 @@ foreach ($spWebApplication in $spWebApplications)
         }
     else
         {
-            if (!($spSites = $spSites = Get-SPSite $siteUrl -ErrorAction SilentlyContinue)) {Write-Warning ("Could not retrieve Sites!");continue;}
+        if (!($spSites = Get-SPSite $siteUrl -ErrorAction SilentlyContinue)) {Write-Warning ("Could not retrieve Site!");continue;}
         }
     if (($spSites | Measure-Object).Count -gt 0)
         {
@@ -343,15 +345,18 @@ foreach ($spWebApplication in $spWebApplications)
             $spObjects += (Get-SpSiteListsInfo -spSite $spSite -outputEnabled:$outputEnabled)
             $spSite.Dispose()
             }
+
         }
     else
         {
         if ($outputEnabled) {Write-Host ("NOTE: Skipping - 0 sites detected: " + $spWebApplication.Url) -foreGroundcolor Cyan}
         }
+    $spSites = $null
     }
 #endregion - web application iteration
 $spObjects | Export-Csv -Path $reportFullPathName -Encoding UTF8 -NoTypeInformation
 if ($outputEnabled) {Write-Host ("Output can be found here: " + $reportFullPathName)}
+[System.gc]::Collect()
 #endregion - Main
 ###########################################################################################################################################
 }
